@@ -6,6 +6,10 @@ tail(incidents) #displays last 6 rows of incidents
 
 install.packages("Hmisc")
 library("Hmisc")
+install.packages("magrittr")
+library(magrittr)
+install.packages("dplyr")
+library(dplyr)
 
 missing_data <- table(is.na.data.frame(incidents)) #displays "TRUE" for missing values in the dataframe
 missing_data
@@ -61,11 +65,6 @@ install.packages("ggmap")
 library(ggmap)
 myLocation <- geocode("San Francisco")
 myMap <- get_map(location = myLocation, source = "google", maptype = "roadmap", zoom = 12)
-
-install.packages("magrittr")
-library(magrittr)
-install.packages("dplyr")
-library(dplyr)
 
 arrests <- incidents %>% filter(grepl("ARREST", Resolution))
 ggmap(myMap) + geom_point(data = arrests, aes(x = X, y = Y), color = "darkred", size = 0.5, alpha = 0.01) + labs(title = "Arrests made in SF City during 2003-2017")
